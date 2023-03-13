@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.9.1.41621",
-      "templateHash": "17672456808609223835"
+      "templateHash": "11076199005359658208"
     }
   },
   "parameters": {
@@ -28,10 +28,6 @@
     "privateEndpointSubnetAddressPrefix": {
       "type": "string",
       "defaultValue": "10.0.2.0/27"
-    },
-    "fileShareName": {
-      "type": "string",
-      "defaultValue": "strp98"
     }
   },
   "resources": [
@@ -156,9 +152,6 @@
         },
         "mode": "Incremental",
         "parameters": {
-          "fileShareName": {
-            "value": "[parameters('fileShareName')]"
-          },
           "location": {
             "value": "[parameters('location')]"
           }
@@ -170,14 +163,11 @@
             "_generator": {
               "name": "bicep",
               "version": "0.9.1.41621",
-              "templateHash": "13809700076729077895"
+              "templateHash": "5717899036849286331"
             }
           },
           "parameters": {
             "location": {
-              "type": "string"
-            },
-            "fileShareName": {
               "type": "string"
             }
           },
@@ -187,7 +177,7 @@
           "resources": [
             {
               "type": "Microsoft.Storage/storageAccounts",
-              "apiVersion": "2021-04-01",
+              "apiVersion": "2022-09-01",
               "name": "[variables('contentStorageAccountName')]",
               "location": "[parameters('location')]",
               "sku": {
@@ -198,18 +188,11 @@
                 "publicNetworkAccess": "Disabled",
                 "networkAcls": {
                   "bypass": "AzureServices",
-                  "defaultAction": "Deny"
+                  "defaultAction": "Deny",
+                  "ipRules": []
                 },
                 "supportsHttpsTrafficOnly": true
               }
-            },
-            {
-              "type": "Microsoft.Storage/storageAccounts/fileServices/shares",
-              "apiVersion": "2021-04-01",
-              "name": "[format('{0}/default/{1}', variables('contentStorageAccountName'), toLower(parameters('fileShareName')))]",
-              "dependsOn": [
-                "[resourceId('Microsoft.Storage/storageAccounts', variables('contentStorageAccountName'))]"
-              ]
             }
           ],
           "outputs": {
@@ -635,7 +618,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.9.1.41621",
-              "templateHash": "17913568843471160220"
+              "templateHash": "9708712490454750312"
             }
           },
           "parameters": {
@@ -679,7 +662,7 @@
               "properties": {
                 "virtualNetworkSubnetId": "[parameters('subnetId')]",
                 "siteConfig": {
-                  "netFrameworkVersion": "v4.6",
+                  "netFrameworkVersion": "v6.0",
                   "appSettings": [
                     {
                       "name": "APP_KIND",
@@ -719,7 +702,7 @@
                     },
                     {
                       "name": "WEBSITE_NODE_DEFAULT_VERSION",
-                      "value": "~14"
+                      "value": "~16"
                     },
                     {
                       "name": "APPINSIGHTS_INSTRUMENTATIONKEY",
@@ -743,10 +726,6 @@
                     },
                     {
                       "name": "WEBSITE_CONTENTOVERVNET",
-                      "value": "1"
-                    },
-                    {
-                      "name": "WEBSITE_VNET_ROUTE_ALL",
                       "value": "1"
                     }
                   ],

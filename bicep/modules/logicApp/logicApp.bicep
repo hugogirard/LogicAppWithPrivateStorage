@@ -33,7 +33,7 @@ resource logiapp 'Microsoft.Web/sites@2021-02-01' = {
   properties: {    
     virtualNetworkSubnetId: subnetId
     siteConfig: {
-      netFrameworkVersion: 'v4.6'      
+      netFrameworkVersion: 'v6.0'      
       appSettings: [
         {
           name: 'APP_KIND'
@@ -73,7 +73,7 @@ resource logiapp 'Microsoft.Web/sites@2021-02-01' = {
         }
         {
           name: 'WEBSITE_NODE_DEFAULT_VERSION'
-          value: '~14'
+          value: '~16'
         }      
         {
           name: 'APPINSIGHTS_INSTRUMENTATIONKEY'
@@ -98,11 +98,7 @@ resource logiapp 'Microsoft.Web/sites@2021-02-01' = {
         {
           name: 'WEBSITE_CONTENTOVERVNET'
           value: '1'         
-        }
-        {
-          name: 'WEBSITE_VNET_ROUTE_ALL'
-          value: '1'
-        }      
+        } 
       ]
       use32BitWorkerProcess: true
     }

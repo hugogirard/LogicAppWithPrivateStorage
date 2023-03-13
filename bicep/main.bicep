@@ -3,7 +3,7 @@ param vnetName string = 'vnet-lgapp'
 param virtualNetworkAddressPrefix string = '10.0.0.0/16'
 param logicAppSubnetAddressPrefix string = '10.0.1.0/24'
 param privateEndpointSubnetAddressPrefix string = '10.0.2.0/27'
-param fileShareName string = 'strp98'
+//param fileShareName string = 'strp98'
 
 
 module vnet 'modules/networking/vnet.bicep' = {
@@ -19,8 +19,7 @@ module vnet 'modules/networking/vnet.bicep' = {
 
 module storage 'modules/storage/storage.bicep' = {
   name: 'storage'
-  params: {
-    fileShareName: fileShareName
+  params: {    
     location: location
   }
 }
