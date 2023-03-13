@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.9.1.41621",
-      "templateHash": "11076199005359658208"
+      "templateHash": "14558835219540972257"
     }
   },
   "parameters": {
@@ -28,6 +28,10 @@
     "privateEndpointSubnetAddressPrefix": {
       "type": "string",
       "defaultValue": "10.0.2.0/27"
+    },
+    "fileShareName": {
+      "type": "string",
+      "defaultValue": "strp98"
     }
   },
   "resources": [
@@ -154,6 +158,9 @@
         "parameters": {
           "location": {
             "value": "[parameters('location')]"
+          },
+          "fileShareName": {
+            "value": "[parameters('fileShareName')]"
           }
         },
         "template": {
@@ -163,11 +170,14 @@
             "_generator": {
               "name": "bicep",
               "version": "0.9.1.41621",
-              "templateHash": "5717899036849286331"
+              "templateHash": "18222270280218858253"
             }
           },
           "parameters": {
             "location": {
+              "type": "string"
+            },
+            "fileShareName": {
               "type": "string"
             }
           },
@@ -193,6 +203,14 @@
                 },
                 "supportsHttpsTrafficOnly": true
               }
+            },
+            {
+              "type": "Microsoft.Storage/storageAccounts/fileServices/shares",
+              "apiVersion": "2021-04-01",
+              "name": "[format('{0}/default/{1}', variables('contentStorageAccountName'), toLower(parameters('fileShareName')))]",
+              "dependsOn": [
+                "[resourceId('Microsoft.Storage/storageAccounts', variables('contentStorageAccountName'))]"
+              ]
             }
           ],
           "outputs": {
@@ -609,6 +627,9 @@
           },
           "subnetId": {
             "value": "[reference(resourceId('Microsoft.Resources/deployments', 'vnet')).outputs.subnetWebId.value]"
+          },
+          "fileShareName": {
+            "value": "[parameters('fileShareName')]"
           }
         },
         "template": {
@@ -618,7 +639,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.9.1.41621",
-              "templateHash": "9708712490454750312"
+              "templateHash": "10707730869844303547"
             }
           },
           "parameters": {
@@ -632,6 +653,9 @@
               "type": "string"
             },
             "subnetId": {
+              "type": "string"
+            },
+            "fileShareName": {
               "type": "string"
             }
           },
@@ -722,7 +746,7 @@
                     },
                     {
                       "name": "WEBSITE_CONTENTSHARE",
-                      "value": "logicapp98"
+                      "value": "[parameters('fileShareName')]"
                     },
                     {
                       "name": "WEBSITE_CONTENTOVERVNET",

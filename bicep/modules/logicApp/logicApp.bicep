@@ -2,6 +2,7 @@ param location string
 param storageName string
 param appInsightName string
 param subnetId string 
+param fileShareName string
 
 var suffix = uniqueString(resourceGroup().id)
 
@@ -93,7 +94,7 @@ resource logiapp 'Microsoft.Web/sites@2021-02-01' = {
         }
         {
           name: 'WEBSITE_CONTENTSHARE'
-          value: 'logicapp98'
+          value: fileShareName
         }
         {
           name: 'WEBSITE_CONTENTOVERVNET'
