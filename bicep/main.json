@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.9.1.41621",
-      "templateHash": "4879050316019193128"
+      "templateHash": "17672456808609223835"
     }
   },
   "parameters": {
@@ -170,7 +170,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.9.1.41621",
-              "templateHash": "8921579931930215275"
+              "templateHash": "13809700076729077895"
             }
           },
           "parameters": {
@@ -195,6 +195,7 @@
               },
               "kind": "StorageV2",
               "properties": {
+                "publicNetworkAccess": "Disabled",
                 "networkAcls": {
                   "bypass": "AzureServices",
                   "defaultAction": "Deny"
